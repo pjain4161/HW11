@@ -5,23 +5,26 @@
 ###############################################################################
 # Imports  # there will only be one import added here.
 
+import os
+
+
 ###############################################################################
 # Write f01 that prints "Hello World!" and calls f02. (three lines)
 def f01():
-
+    print "Hello World!"
     f02()
 ###############################################################################
 # Write f02 that sets the variables x, y, and z equal to the words 
 # necessary to have the f03 print "i love python!" (five lines)
-
-
-
-
+def f02():
+    x = "i"
+    y = "love"
+    z = "python"
     f03(x,y,z)  # Last line in f2()
 ###############################################################################
 # Finish f03 (replace the ????). 
 def f03(*words):
-    truth = " ".???(words)  # This is broken.
+    truth = " ".join(words)  # This is broken.
     truth_emphasized = truth + "!"
     print truth_emphasized
     f04(truth)  # Last line in f03()
@@ -29,7 +32,7 @@ def f03(*words):
 # Write f04 that prints truth backwards (edit one line only)
 # Ex. f4("Littlest Bear") prints "raeB tselttiL"
 def f04(string):
-    
+    print string[::-1] 
     f05(string)  # Last line in f04()
 ###############################################################################
 # Write f05 that for each char in a word passed as a parameter, prints that 
@@ -41,11 +44,10 @@ def f04(string):
 #   Info
 #    Info
 def f05(word):
-
-
-
-
-
+    count = 0
+    for char in word:
+        print (" " * count) + char
+        count += 1
     f06("South Hall", "Python Rocks!")  # Last line in f05()
 ###############################################################################
 # Write f06 that takes two strings:
@@ -59,14 +61,22 @@ def f05(word):
 # 'longer_string' is longer than 'short_string' by 1 chars
 # 'short_string' has only 92.31% the number of chars of longer_string
 def f06(string1, string2):
-
-
-
-
-
-
-
-
+    if len(string1) > len(string2):
+        longer_string = string1
+        shorter_string = string2     
+    else:
+        longer_string = string2
+        shorter_string = string1
+        
+    diff = len(longer_string) - len(shorter_string)
+        
+    print "{0} is longer than {1} by {2} chars" .format(longer_string, shorter_string, diff)
+ 
+    percentage = (len(shorter_string)/len(longer_string)) * 100
+    percentage = float("{0:.2f}".format(percentage))
+    print "{0} has only {1}% the number of chars of {2}" .format(shorter_string, percentage, longer_string)
+        
+ 
     various_solutions()  # Last line in f06()
 ###############################################################################
 # Write f07, f08, f09, f10 to find the sum of all the multiples of 3 or 5 
@@ -97,42 +107,49 @@ def various_solutions():
     f12()
 ###############################################################################
 def f07():
+    num = 1
+    sum = 0
+    while num < 500 : 
+        if (num % 3 == 0) or (num % 5 == 0):
+            sum += num
+        num += 1
+    return sum
     
-
-
-
 ###############################################################################
 def f08():
+    num = 1
+    sum = 0
+    for num in range(500):
+        if (num % 3 == 0) or (num % 5 == 0):
+            sum += num
+    return sum
     
-
-
 
 ###############################################################################
 def f09():
-    
-
-
-
-
-
+    return sum(num  for num in range(1,500) if ((num % 3 == 0) or (num % 5 == 0)))
 ###############################################################################
-def f10():
-
-
-
-
-
-
-
+def f10(sum = 0, num =1):
+    sum += num 
+    num += 1
+    if num < 500:
+        sum = f10(sum, num)
+        return sum
+    return sum
+    
 
 ###############################################################################
 # Write f11() to take arguments, printing them as floats if they started as
 # strings, integers if they started as floats, and as the value 0 if they
 # started as ints.
 def f11(args):
+    if type(args) == type("a"):
+        print float(args)
+    elif type(args) == type(1.0):
+        print int(args)
+    elif type(args) == type(1):
+        print 0
     
-
-
 
 
 ###############################################################################
@@ -148,17 +165,29 @@ def f11(args):
 # Ex. printing
 #   [1.0, 1.3, 2.443]
 def f12():
-    
-
-
-
-
+    list_ = []
+    while(True): 
+        userInput = raw_input("Give an input")
+        if userInput == "done":
+            break
+        
+        try:
+            inputFloat = float(userInput)
+            
+        except ValueError:
+            with open("log_file.txt, 'w") as f:
+                f.write(input_ + "\n")
+                
+        else:
+            list_.append(inputFloat)
+            
+    print list_
 
     f13()  # Last line in f12()
 ###############################################################################
 # Fix the error in f13:
 def f13():
-    for each in "string"
+    for each in "string":
         print each
     f14()  # Last line in f13()
 ###############################################################################
@@ -166,10 +195,7 @@ def f13():
 # You must add an import statement. Please do so at the top of the file.
 # Ex. /Users/dsg/Desktop/python-boot-camp/HW11/diagnostic.py
 def f14():
-    
-
-
-
+    print os.getcwd()+ "\\" + os.path.basename(__file__)
 
     f15()  # Last line in f14()
 ###############################################################################
@@ -187,12 +213,17 @@ def f14():
 # [[], [], [], [], [], [], [], [], [0], []]
 # [[], [], [], [], [], [], [], [], [], [0]]
 def f15():
-
-
-
-
-
-
+    for j in range(10):
+        list1 = []
+        list2 = []
+        list3 = []
+        list1.append(0)
+        list2.append(list1)
+        for i in range(9):
+            list2.append(list3)
+        print list2
+        
+            
     f16([1,2,3],[4,5,6])  # Last line in f15()
 ###############################################################################
 # Write f16() that takes two lists and prints a list with the nth elements of 
@@ -303,6 +334,9 @@ def f23(lists_):
 # Write main() that calls f01, then prints the The Zen of Python, by Tim Peters.
 # (three lines)
 def main():
+    f01()
+    import this
+    
 
 
 
@@ -311,5 +345,7 @@ def main():
 
 
 # Write the boilerplate code. (two lines)
+if __name__ == '__main__':
+    main()
 
 
